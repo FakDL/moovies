@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/filmsFragment">
+
+    <fragment
+        android:id="@+id/filmsFragment"
+        android:name="com.fakdl.moovies.ui.main.FilmsFragment"
+        android:label="fragment_films"
+        tools:layout="@layout/fragment_films" >
+        <action
+            android:id="@+id/action_filmsFragment_to_likesFragment"
+            app:destination="@id/likesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.fakdl.moovies.ui.main.LikesFragment"
+        android:label="fragment_likes"
+        tools:layout="@layout/fragment_likes" />
+</navigation>
