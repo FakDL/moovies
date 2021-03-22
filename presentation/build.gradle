@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 30
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    defaultConfig {
+        applicationId "com.moovies.presentation"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':domain')
+    implementation project(':data')
+    implementation kotlinDep
+
+    implementation androidDep
+    implementation constraintDep
+
+    implementation navigationFragmentDep
+    implementation navigationUiDep
+
+    implementation rxJavaDep
+    implementation rxAndroidDep
+
+    implementation pagingDep
+    implementation pagingRxJavaDep
+
+    implementation daggerDep
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt daggerKapt
+
+    implementation coroutinesCoreDep
+//    implementation lifecycleDep
+//    kapt lifecycleKapt
+
+    implementation retrofitDep
+    implementation gsonConvertedDep
+    implementation gsonDep
+    implementation interceptorVersionDep
+    implementation rxAdapterDep
+
+
+    implementation firebaseAuthDep
+    implementation firebaseFirestoreDep
+    implementation platform(firebasePlatformDep)
+    implementation firebaseAnalyticsDep
+    implementation firebaseDatabaseDep
+    implementation firebaseCoreDep
+    implementation firebasePlayServicesDep
+
+    testImplementation jUnitDep
+
+    implementation glideDep
+    kapt glideKapt
+    implementation glideOkHttpDep
+    implementation ('com.github.bumptech.glide:okhttp3-integration:4.12.0'){
+        exclude group: 'glide-parent'
+    }
+}

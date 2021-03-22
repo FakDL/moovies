@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item android:id="@+id/filmsFragment"
+        android:title="Search"
+        app:showAsAction="always"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_search"/>
+
+    <item android:id="@+id/likesFragment"
+        android:title="Favorite"
+        app:showAsAction="always"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_favorite"/>
+
+    <item android:id="@+id/accountFragment"
+        android:title="Account"
+        app:showAsAction="always"
+        android:orderInCategory="3"
+        android:icon="@drawable/ic_user"/>
+
+</menu>

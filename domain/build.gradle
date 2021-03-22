@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation kotlinDep
+    implementation rxJavaDep
+
+//    implementation pagingDep
+//    implementation pagingRxJavaDep
+
+    implementation "androidx.paging:paging-common:$paging_version"
+
+    implementation coroutinesCoreDep
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/likesFragment">
+
+    <fragment
+        android:id="@+id/filmsFragment"
+        android:name="com.moovies.presentation.ui.main.fragments.FilmsFragment"
+        android:label="fragment_films"
+        tools:layout="@layout/fragment_films" >
+
+        <action
+            android:id="@+id/action_filmsFragment_to_likesFragment"
+            app:destination="@id/likesFragment">
+
+        </action>
+        <action
+            android:id="@+id/action_filmsFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.moovies.presentation.ui.main.fragments.LikesFragment"
+        android:label="fragment_likes"
+        tools:layout="@layout/fragment_likes" >
+
+        <action
+            android:id="@+id/action_likesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_likesFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.moovies.presentation.ui.main.fragments.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="filmId"
+            app:argType="long"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.moovies.presentation.ui.main.fragments.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+</navigation>
