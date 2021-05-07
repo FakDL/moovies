@@ -3,7 +3,7 @@ package com.moovies.data.di
 import android.app.Application
 import android.content.SharedPreferences
 import android.content.Context
-import com.moovies.domain.UserInteractor
+import com.moovies.domain.interactors.UserInteractor
 import com.moovies.domain.interfaces.UserRepository
 import dagger.Module
 import dagger.Provides

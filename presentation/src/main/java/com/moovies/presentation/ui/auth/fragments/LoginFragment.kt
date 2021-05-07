@@ -14,11 +14,11 @@ import com.moovies.presentation.R
 import com.moovies.presentation.di.auth.AuthScope
 import com.moovies.data.util.Constants.WRONG_ACC
 import com.moovies.data.util.Utils.md5
+import com.moovies.presentation.databinding.FragmentLoginBinding
 import com.moovies.presentation.ui.auth.AuthActivity
 import com.moovies.presentation.viewmodels.auth.LoginActionState
 import com.moovies.presentation.viewmodels.auth.LoginViewModel
 import com.moovies.presentation.viewmodels.auth.LoginViewState
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,6 +31,10 @@ constructor(
     private val viewModelFactory: ViewModelProvider.Factory
 ) : Fragment() {
 
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+
+
     private val viewModel: LoginViewModel by viewModels {
         viewModelFactory
     }
@@ -40,7 +44,9 @@ constructor(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -57,16 +63,19 @@ constructor(
         viewModel.viewState.observe(viewLifecycleOwner, { state ->
             when (state) {
                 is LoginViewState.Success -> {
-                    progressBar.visibility = ProgressBar.INVISIBLE
+                    binding.progressBar.visibility = ProgressBar.INVISIBLE
+                    binding.btnLogin.isClickable = true
                 }
                 is LoginViewState.LoginFailed -> {
-                    progressBar.visibility = ProgressBar.INVISIBLE
+                    binding.progressBar.visibility = ProgressBar.INVISIBLE
                     if (state.errorType == WRONG_ACC) {
                         Toast.makeText(activity, "Неверная почта или пароль", Toast.LENGTH_SHORT).show()
                     }
+                    binding.btnLogin.isClickable = true
                 }
                 is LoginViewState.Loading -> {
-                    progressBar.visibility = ProgressBar.VISIBLE
+                    binding.progressBar.visibility = ProgressBar.VISIBLE
+                    binding.btnLogin.isClickable = false
                 }
             }
         })
@@ -84,16 +93,20 @@ constructor(
     }
 
     fun setClickListeners() {
-        btn_login.setOnClickListener{
+        binding.btnLogin.setOnClickListener{
             GlobalScope.launch {
-                val email = input_email.text.toString()
-                val hashPassword = md5(input_password.text.toString())
+                val email = binding.inputEmail.text.toString()
+                val hashPassword = md5(binding.inputPassword.text.toString())
                 viewModel.login(email, hashPassword)
             }
         }
-        tv_no_acc.setOnClickListener {
+        binding.tvNoAcc.setOnClickListener {
             viewModel.goToRegistration()
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -1,8 +1,9 @@
 package com.moovies.data.di.main
 
+import com.moovies.data.BuildConfig
 import com.moovies.data.network.FilmService
 import com.moovies.data.util.Constants
-import com.moovies.data.util.Constants.API_KEY
+import com.moovies.domain.di.MainScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.Dispatcher
@@ -30,7 +31,7 @@ object NetworkModule {
             .dispatcher(dispatcher)
             .addInterceptor { chain ->
             val request = chain.request().newBuilder()
-                .addHeader("x-rapidapi-key", API_KEY)
+                .addHeader("x-rapidapi-key", BuildConfig.API_KEY)
                 .addHeader("x-rapidapi-host", "imdb8.p.rapidapi.com")
                 .addHeader("useQueryString", true.toString())
                 .build()

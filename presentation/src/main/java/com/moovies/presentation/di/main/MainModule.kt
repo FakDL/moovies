@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
-import com.moovies.data.di.main.MainScope
+import com.moovies.domain.di.MainScope
 import com.moovies.presentation.R
 import com.moovies.presentation.factories.main.MainFragmentFactory
 import com.moovies.presentation.glide.GlideApp

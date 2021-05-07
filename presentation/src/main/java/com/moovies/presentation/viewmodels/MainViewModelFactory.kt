@@ -2,7 +2,7 @@ package com.moovies.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.moovies.data.di.main.MainScope
+import com.moovies.domain.di.MainScope
 import javax.inject.Inject
 import javax.inject.Provider
 

@@ -3,9 +3,8 @@ package com.moovies.presentation.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.FragmentFactory
-import androidx.lifecycle.LiveData
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.moovies.presentation.BaseApplication
@@ -18,8 +17,6 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     lateinit var navHost: NavHostFragment
 
-    private var currentNavController: LiveData<NavController>? = null
-
     @Inject
     lateinit var fragmentFactory: FragmentFactory
 
@@ -27,7 +24,16 @@ class MainActivity : AppCompatActivity() {
         inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d("Test", savedInstanceState.toString())
+        if(savedInstanceState == null){
+            createNavHost()
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
         createNavHost()
+        Log.d("Test", "re$savedInstanceState")
     }
 
     override fun onStart() {
@@ -53,16 +59,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createNavHost(){
+        Log.d("Test", "creating NAVHOST")
         navHost = MainNavHostFragment.create(
             R.navigation.main_nav_graph
         )
-//        val navGraphIds = listOf(R.navigation.main_nav_graph)
-//        val controller = btm_nav_bar.setupWithNavController(
-//            navGraphIds = navGraphIds,
-//            fragmentManager = supportFragmentManager,
-//            containerId = R.id.main_fragments_container,
-//            intent = intent
-//        )
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.main_fragments_container,
@@ -71,11 +71,8 @@ class MainActivity : AppCompatActivity() {
             )
             .setPrimaryNavigationFragment(navHost)
             .commit()
-//        controller.observe(this, { navController ->
-//            setupActionBarWithNavController(navController)
-//        })
-//        currentNavController = controller
     }
 
+    override fun onSupportNavigateUp(): Boolean = navHost.navController.navigateUp()
 
 }

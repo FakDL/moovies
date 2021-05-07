@@ -15,12 +15,9 @@ import com.moovies.presentation.di.auth.AuthScope
 import com.moovies.data.util.Constants.EMPTY_FIELDS
 import com.moovies.data.util.Constants.WRONG_EMAIL
 import com.moovies.data.util.Utils.md5
+import com.moovies.presentation.databinding.FragmentRegistrationBinding
 import com.moovies.presentation.ui.auth.AuthActivity
 import com.moovies.presentation.viewmodels.auth.*
-import kotlinx.android.synthetic.main.fragment_registration.*
-import kotlinx.android.synthetic.main.fragment_registration.input_email
-import kotlinx.android.synthetic.main.fragment_registration.input_password
-import kotlinx.android.synthetic.main.fragment_registration.progressBar
 import javax.inject.Inject
 
 @AuthScope
@@ -30,6 +27,9 @@ class RegistrationFragment
     viewModelFactory: ViewModelProvider.Factory
 ) : Fragment() {
 
+    private var _binding: FragmentRegistrationBinding? = null
+    private val binding get() = _binding!!
+
     val viewModel: RegistrationViewModel by viewModels {
         viewModelFactory
     }
@@ -38,7 +38,7 @@ class RegistrationFragment
         super.onActivityCreated(savedInstanceState)
         setClickListeners()
         setupObservers()
-        if(sharedPreferences.getBoolean("isLoggedIn", false)) {
+        if (sharedPreferences.getBoolean("isLoggedIn", false)) {
             (activity as AuthActivity).navToMain()
         }
     }
@@ -48,7 +48,9 @@ class RegistrationFragment
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registration, container, false)
+        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     private fun setupObservers() {
@@ -59,16 +61,17 @@ class RegistrationFragment
                 }
             }
         })
-        viewModel.viewState.observe(viewLifecycleOwner,  { state ->
+        viewModel.viewState.observe(viewLifecycleOwner, { state ->
             when (state) {
                 is RegistrationViewState.Success -> {
-                    progressBar.visibility = ProgressBar.INVISIBLE
+                    binding.progressBar.visibility = ProgressBar.INVISIBLE
                 }
                 is RegistrationViewState.RegistrationFailed -> {
-                    progressBar.visibility = ProgressBar.INVISIBLE
+                    binding.progressBar.visibility = ProgressBar.INVISIBLE
                     when (state.errorType) {
                         EMPTY_FIELDS -> {
-                            Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_SHORT)
+                                .show()
                         }
                         WRONG_EMAIL -> {
                             Toast.makeText(activity, "Неверная почта", Toast.LENGTH_SHORT).show()
@@ -79,20 +82,25 @@ class RegistrationFragment
                     }
                 }
                 is RegistrationViewState.Loading -> {
-                    progressBar.visibility = ProgressBar.VISIBLE
+                    binding.progressBar.visibility = ProgressBar.VISIBLE
                 }
             }
         })
     }
 
     private fun setClickListeners() {
-        btn_register.setOnClickListener{
-            val email = input_email.text.toString()
-            val username = input_username.text.toString()
-            val hashPassword = md5(input_password.text.toString())
-            val confirmHashPassword = md5(input_password_confirm.text.toString())
-            viewModel.register(email, username,  hashPassword, confirmHashPassword)
+        binding.btnRegister.setOnClickListener {
+            val email = binding.inputEmail.text.toString()
+            val username = binding.inputUsername.text.toString()
+            val hashPassword = md5(binding.inputPassword.text.toString())
+            val confirmHashPassword = md5(binding.inputPasswordConfirm.text.toString())
+            viewModel.register(email, username, hashPassword, confirmHashPassword)
 
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

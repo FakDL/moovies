@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
-import com.moovies.data.di.main.MainScope
+import com.moovies.domain.di.MainScope
 import com.moovies.presentation.ui.main.fragments.AccountFragment
 import com.moovies.presentation.ui.main.fragments.DetailsFragment
 import com.moovies.presentation.ui.main.fragments.FilmsFragment
@@ -25,23 +25,23 @@ constructor(
         when (className) {
 
             FilmsFragment::class.java.name -> {
-                FilmsFragment(sharedPreferences, viewModelFactory, requestManager)
+                FilmsFragment(viewModelFactory, requestManager)
             }
 
             LikesFragment::class.java.name -> {
-                LikesFragment( viewModelFactory)
+                LikesFragment(viewModelFactory, requestManager)
             }
 
             DetailsFragment::class.java.name -> {
-                DetailsFragment( viewModelFactory)
+                DetailsFragment(viewModelFactory, requestManager)
             }
 
             AccountFragment::class.java.name -> {
-                AccountFragment(sharedPreferences, viewModelFactory)
+                AccountFragment(viewModelFactory, sharedPreferences)
             }
 
             else -> {
-                FilmsFragment(sharedPreferences, viewModelFactory, requestManager)
+                FilmsFragment(viewModelFactory, requestManager)
             }
         }
 }

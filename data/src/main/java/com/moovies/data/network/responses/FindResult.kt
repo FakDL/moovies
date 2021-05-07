@@ -2,10 +2,12 @@ package com.moovies.data.network.responses
 
 import com.moovies.domain.model.Film
 
-data class FilmResponse(
+data class FindResult(
     val id: String,
-    val runningTimeInMinutes: Int,
+    val legacyNameText: String,
+    val name: String,
     val image: FilmImage,
+    val runningTimeInMinutes: Int,
     val title: String,
     val titleType: String,
     val year: Int

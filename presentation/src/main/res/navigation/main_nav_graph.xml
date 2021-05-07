@@ -40,7 +40,8 @@
         tools:layout="@layout/fragment_details">
         <argument
             android:name="filmId"
-            app:argType="long"
+            app:argType="string"
+            android:defaultValue="tt1439629"
             />
     </fragment>
     <fragment

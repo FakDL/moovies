@@ -6,16 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.fragments.LikesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pb_likes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="любимые" />
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_placeholder"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_likes"
+        tools:listitem="@layout/item_film"
+        tools:itemCount="10"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/error" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

@@ -4,5 +4,6 @@ data class Film (
     val id: String,
     val title: String,
     val year: Int,
-    val img_url: String
+    val imgUrl: String,
+    val duration: Int
 )

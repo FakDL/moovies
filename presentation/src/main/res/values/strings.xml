@@ -18,4 +18,5 @@
     <string name="email_placeholder">Почта: </string>
     <string name="username_placeholder">Юзернейм: </string>
     <string name="logout">Выйти</string>
+    <string name="search">Найти</string>
 </resources>

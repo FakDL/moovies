@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moovies.data.util.Constants
 import com.moovies.presentation.viewmodels.auth.RegistrationActionState.*
-import com.moovies.domain.UserInteractor
+import com.moovies.domain.interactors.UserInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

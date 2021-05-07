@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moovies.data.util.Constants.WRONG_ACC
 import com.moovies.presentation.viewmodels.SingleLiveEvent
-import com.moovies.domain.UserInteractor
+import com.moovies.domain.interactors.UserInteractor
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
