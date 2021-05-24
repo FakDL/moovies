@@ -71,7 +71,6 @@ class FilmInteractor @Inject constructor(
 
     @FlowPreview
     fun getFilmStream(source: FilmPagingSource): Flow<PagingData<Film>> {
-        println("TTT $source")
         source
         return Pager(
             config = PagingConfig(

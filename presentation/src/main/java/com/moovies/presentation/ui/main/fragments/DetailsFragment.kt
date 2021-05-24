@@ -87,7 +87,9 @@ class DetailsFragment
                     binding.pbDetails.isVisible = false
                     downloadImageHelper.setImage(binding.ivPoster, state.film.imgUrl)
                     setRatingView(state.ratings)
-                    binding.tvTitle.text = state.film.title
+                    setDurationView(state.film.duration)
+                    val title = state.film.title + "(" + state.film.year + ")"
+                    binding.tvTitle.text = title
                 }
                 is DetailsFetchingViewState.Loading -> {
                     binding.clDetails.isVisible = false
@@ -120,11 +122,25 @@ class DetailsFragment
 
 
     private fun setRatingView(ratings: FilmRatings) {
-        val str = ratings.rating.toString() + "/10 \n" + ratings.ratingCount
-        val spannable = SpannableString(str)
-        spannable.setSpan(RelativeSizeSpan(2f), 0, 3, 0)
-        spannable.setSpan(ForegroundColorSpan(Color.BLACK), 0, 3, 0)
-        binding.tvRating.text = spannable
+        if (ratings.ratingCount == 0) {
+            val str = "Рейтинга пока нет"
+            binding.tvRating.text = str
+        } else {
+            val str = ratings.rating.toString() + "/10 \n" + ratings.ratingCount
+            val spannable = SpannableString(str)
+            spannable.setSpan(RelativeSizeSpan(2f), 0, 3, 0)
+            spannable.setSpan(ForegroundColorSpan(Color.BLACK), 0, 3, 0)
+            binding.tvRating.text = spannable
+        }
+    }
+
+    private fun setDurationView(duration: Int) {
+        if (duration == 0) {
+            binding.tvDuration.isVisible = false
+        } else {
+            val str = "Длительность: $duration минут."
+            binding.tvDuration.text = str
+        }
     }
 
     override fun onDestroyView() {

@@ -17,14 +17,12 @@
         android:id="@+id/cl_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        >
+        android:layout_margin="8dp">
 
         <ImageView
             android:id="@+id/iv_poster"
             android:layout_width="180dp"
             android:layout_height="290dp"
-            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,33 +33,30 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_star"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintVertical_bias="0.6"
-            app:layout_constraintStart_toEndOf="@+id/iv_poster"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <TextView
             android:id="@+id/tv_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lines="2"
             android:text="Рейтинг"
             android:textSize="16sp"
-            android:lines="2"
-            app:layout_constraintVertical_bias="0.6"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toEndOf="@+id/iv_star"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="24sp"
             android:textColor="@android:color/black"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
@@ -70,14 +65,26 @@
             android:id="@+id/fab_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:backgroundTint="@android:color/white"
-            app:tint="@android:color/holo_red_light"
+            android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/ic_favorite"
             app:elevation="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:focusable="true" />
+            app:tint="@android:color/holo_red_light" />
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="20dp"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintTop_toBottomOf="@id/iv_star"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
